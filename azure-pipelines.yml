@@ -19,7 +19,7 @@ steps:
     repository: 'rkalluru/d53-rs-cart'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
-    tags: 'latest'
+    tags: '$(Build.BuildId)'
 
 
 # - script: |
