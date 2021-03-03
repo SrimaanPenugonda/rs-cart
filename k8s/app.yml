@@ -13,7 +13,7 @@ spec:
     metadata:
       annotations:
         co.elastic.logs/enabled: "true"
-        co.elastic.logs/json.keys_under_root: true
+        co.elastic.logs/json.keys_under_root: "true"
       labels:
         app: cart
     spec:
