@@ -17,14 +17,13 @@ steps:
     targetType: 'inline'
     script: 'env'
   displayName: Env Command #this task helps to check the BUILD parameters
-- task: Npm@1
-  inputs:
-    command: 'install'
-    workingDir: 'publish'
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
+      mkdir publish
+      npm install --unsafe-perm
       cp -r node_modules server.js publish
   displayName: Prepare Artifacts
 
