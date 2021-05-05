@@ -18,10 +18,7 @@ steps:
     script: 'env'
   displayName: Env Command #this task helps to check the BUILD parameters
  
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
+- script: |
       mkdir $(Build.SourcesDirectory)/publish
       npm install
       cp -r node_modules server.js $(Build.SourcesDirectory)/publish
