@@ -12,21 +12,24 @@ trigger:
 pool: Default  #self hosted pool
 
 steps:
-  - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: 'env'
-      displayName: Env Command #this task helps to check the BUILD parameters
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'env'
+  displayName: Env Command #this task helps to check the BUILD parameters
+ 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      mkdir $(Build.SourcesDirectory)/publish
+      npm install
+      cp -r node_modules server.js $(Build.SourcesDirectory)/publish
+  displayName: Prepare Artifacts
 
- - script: |
-     mkdir $(Build.SourcesDirectory)/publish
-     npm install
-     cp -r node_modules server.js $(Build.SourcesDirectory)/publish
-   displayName: Prepare Artifacts
-
- - task: UniversalPackages@0
-   condition: contains(variables['Build.SourceBranch'],'tags') #this condition helps to publish artifacts only when
-   inputs: #publish frontend artifactory                     #tags , Build.SourceBranch
+- task: UniversalPackages@0
+  condition: contains(variables['Build.SourceBranch'],'tags') #this condition helps to publish artifacts only when
+  inputs: #publish frontend artifactory                     #tags , Build.SourceBranch
      command: 'publish'
      publishDirectory: '$(Build.SourcesDirectory)/publish'  # here download only publish directory
      feedsToUsePublish: 'internal'
@@ -34,4 +37,4 @@ steps:
      vstsFeedPackagePublish: 'rscart'
      versionOption: 'custom'
      versionPublish: '$(Build.SourceBranchName)' #Artifact version will be picked from git tag
-   displayName: Publish Artficats
+  displayName: Publish Artficats
