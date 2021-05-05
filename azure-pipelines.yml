@@ -19,7 +19,7 @@ steps:
       displayName: Env Command #this task helps to check the BUILD parameters
 
  - script: |
-     mkdir $(Build.ArtifactStagingDirectory)/publish
+     mkdir $(Build.SourcesDirectory)/publish
      npm install
      cp -r node_modules server.js $(Build.SourcesDirectory)/publish
    displayName: Prepare Artifacts
