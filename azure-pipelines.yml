@@ -22,9 +22,9 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      mkdir $(Build.SourcesDirectory)/publish
+      mkdir publish
       npm install
-      cp -r node_modules server.js $(Build.SourcesDirectory)/publish
+      cp -r node_modules server.js publish
   displayName: Prepare Artifacts
 
 - task: UniversalPackages@0
