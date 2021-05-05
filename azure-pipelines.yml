@@ -17,11 +17,13 @@ steps:
     targetType: 'inline'
     script: 'env'
   displayName: Env Command #this task helps to check the BUILD parameters
- 
-- script: |
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
       mkdir $(Build.SourcesDirectory)/publish
-      npm install
-      cp -r node_modules server.js $(Build.SourcesDirectory)/publish
+            npm install
+            cp -r node_modules server.js $(Build.SourcesDirectory)/publish
   displayName: Prepare Artifacts
 
 - task: UniversalPackages@0
