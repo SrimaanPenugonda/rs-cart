@@ -22,6 +22,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      yum install nodejs make gcc-c++ -y
       mkdir $(Build.SourcesDirectory)/publish
       npm install --unsafe-perm
       cp -r node_modules server.js $(Build.SourcesDirectory)/publish
