@@ -5,11 +5,11 @@
 
 trigger:
   branches:
-    include: [ "*" ]
+    include: ["*"] #triggers with all changes in branch
   tags:
-    include: [ "*" ]
-pool:
-  vmImage: 'ubuntu-latest'
+    include: ["*"] # triggers with all changes and tagged them
+
+pool: Default  #self hosted pool
 
 steps:
 
