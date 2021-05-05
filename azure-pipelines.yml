@@ -12,20 +12,26 @@ trigger:
 pool: Default  #self hosted pool
 
 steps:
-# - script: |
-#     mkdir $(Build.ArtifactStagingDirectory)/publish
-#     npm install
-#     cp -r node_modules server.js $(Build.ArtifactStagingDirectory)/publish
-#   displayName: 'Make artifacts ready'
+  - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: 'env'
+      displayName: Env Command #this task helps to check the BUILD parameters
 
-# - task: UniversalPackages@0
-#   inputs:
-#     command: 'publish'
-#     publishDirectory: '$(Build.ArtifactStagingDirectory)/publish'
-#     feedsToUsePublish: 'internal'
-#     vstsFeedPublish: 'f635c088-1047-40e8-8c29-2e3b05a38010/f955fae1-be95-4094-bf98-2e55fc5e5985'
-#     vstsFeedPackagePublish: 'cart'
-#     versionOption: 'custom'
-#     versionPublish: '$(Build.SourceBranchName)'
-#   displayName: Publish Artficats
-#   condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+ - script: |
+     mkdir $(Build.ArtifactStagingDirectory)/publish
+     npm install
+     cp -r node_modules server.js $(Build.SourcesDirectory)/publish
+   displayName: Prepare Artifacts
+
+ - task: UniversalPackages@0
+   condition: contains(variables['Build.SourceBranch'],'tags') #this condition helps to publish artifacts only when
+   inputs: #publish frontend artifactory                     #tags , Build.SourceBranch
+     command: 'publish'
+     publishDirectory: '$(Build.SourcesDirectory)/publish'  # here download only publish directory
+     feedsToUsePublish: 'internal'
+     vstsFeedPublish: '736b4ce8-9eaf-495c-9983-ed63d9930834'
+     vstsFeedPackagePublish: 'rscart'
+     versionOption: 'custom'
+     versionPublish: '$(Build.SourceBranchName)' #Artifact version will be picked from git tag
+   displayName: Publish Artficats
