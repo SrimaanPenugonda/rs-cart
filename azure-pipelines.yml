@@ -20,6 +20,7 @@ steps:
 
 - script: |
     curl -s https://raw.githubusercontent.com/linuxautomations/labautomation/master/tools/sonar-scanner/install.sh | sudo bash
+    export SONAR_SCANNER_OPTS="-Xmx512m" 
   displayName: 'Setup Sonar Scanner'
 
 - script: |
