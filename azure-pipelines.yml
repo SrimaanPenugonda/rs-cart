@@ -24,7 +24,11 @@ steps:
   displayName: 'Setup Sonar Scanner'
 
 - script: |
-    sonar-scanner -Dsonar.projectKey=cart -Dsonar.sources=. -Dsonar.host.url=http://3.236.121.125:9000 -Dsonar.login=f6fa9d8abeb218d5225fcb745065ff8c7d85ec2e 
+    sonar-scanner \
+      -Dsonar.projectKey=cart \
+      -Dsonar.sources=. \
+      -Dsonar.host.url=http://34.204.176.100:9000 \
+      -Dsonar.login=b2c457cb1e7b9f1deb495b33aa0151d817619f6e
   displayName: 'Run Sonar Scan'
 - task: Bash@3
   inputs:
