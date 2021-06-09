@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: cart
-          image: rkalluru/d53-rs-cart:VERSION
+          image: srimaanaws2021/rs-cart:VERSION
           ports:
             - containerPort: 8080
           env:
